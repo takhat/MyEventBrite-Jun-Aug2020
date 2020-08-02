@@ -1,34 +1,41 @@
 ﻿@model WebMvc.Models.EventItem
 
     <form asp-controller="Cart" asp-action="AddToCart">
+
         <img class="esh-catalog-thumbnail" src="@Model.PictureUrl" />
-        @*   @if (Model.Price > 0)
+
+        @if (Model.Price > 0)
         {
             <input class="esh-catalog-button" type="submit" value="Buy Tickets" />
         }
         else
         {
             <input class="esh-catalog-button" type="submit" value="Register" />
-        } *@
-        <input class="esh-catalog-button" type="submit" value="View Details" />
-        <div class=".esh-catalog-name">
-            <h3><b>@Model.Title</b></h3>
+        }
+
+
+        <div class="esh-catalog-item-data">
+            @Model.Title
+
         </div>
 
-        @*    @Html.ActionLink(Model.Title, "_productDetails")
-
-        <a href="/Catalog/_productDetails" asp-action="Index" asp-controller="Catalog" method="post">
-            <h3><b>@Model.Title</b></h3>
-        </a>
-          <div style="text-align: justify" >
-            <i>@Model.Description</i>
+      @*  <div class="esh-catalog-item-desc">
+             @Model.Description
         </div> *@
-        <div class="esh-catalog-items">
-            <span>@Model.Location</span>
+        
+
+        <div class="esh-catalog-item-data">
+            @Model.Location
         </div>
-        <div class="esh-catalog-items">
-            <span>@Model.DateAndTime</span>
+
+        <div class="esh-catalog-item-data">
+            @Model.StartDateTime
         </div>
+
+        <div class="esh-catalog-item-data">
+            Contact: @Model.Contact
+        </div>
+
         @if (Model.Price > 0)
         {
             <div class="esh-catalog-name">
@@ -44,24 +51,21 @@
 
         <input type="hidden" asp-for="@Model.EventType" name="type" />
         <input type="hidden" asp-for="@Model.EventTypeId" name="typeId" />
-        <input type="hidden" asp-for="@Model.EventCategory" name="type" />
-        <input type="hidden" asp-for="@Model.EventCategoryId" name="typeId" />
-        <input type="hidden" asp-for="@Model.EventSubCategory" name="type" />
-        <input type="hidden" asp-for="@Model.EventSubCategoryId" name="typeId" />
-        <input type="hidden" asp-for="@Model.Location" name="type" />
-        <input type="hidden" asp-for="@Model.LocationId" name="typeId" />
-        <input type="hidden" asp-for="@Model.DateAndTime" name="type" />
-        <input type="hidden" asp-for="@Model.DateAndTimeId" name="typeId" />
+        <input type="hidden" asp-for="@Model.EventCategory" name="category" />
+        <input type="hidden" asp-for="@Model.EventCategoryId" name="categoryId" />
+        <input type="hidden" asp-for="@Model.EventSubCategory" name="subCategory" />
+        <input type="hidden" asp-for="@Model.EventSubCategoryId" name="subCategoryId" />
+        <input type="hidden" asp-for="@Model.Location" name="location" />
+        <input type="hidden" asp-for="@Model.LocationId" name="locationId" />
+        <input type="hidden" asp-for="@Model.StartDateTime" name="startDateTime" />
+        <input type="hidden" asp-for="@Model.EndDateTime" name="endDateTime" />
+        <input type="hidden" asp-for="@Model.DateAndTimeId" name="datetimeId" />
         <input type="hidden" asp-for="@Model.Description" name="description" />
         <input type="hidden" asp-for="@Model.Id" name="id" />
-        <input type="hidden" asp-for="@Model.Title" name="name" />
+        <input type="hidden" asp-for="@Model.Title" name="title" />
         <input type="hidden" asp-for="@Model.PictureUrl" name="pictureUrl" />
         <input type="hidden" asp-for="@Model.Price" name="price" />
+        <input type="hidden" asp-for="@Model.Contact" name="contact" />
 
-        <script>
-            $(document).ready(function () {
-                $('[data-toggle="popover"]').popover();
-            });
-        </script>
 
     </form>

@@ -21,7 +21,8 @@ namespace WebMvc.Models
         public string EventSubCategory { get; set; }
 
         public string Location { get; set; }
-        public string DateAndTime { get; set; }
+        public string StartDateTime { get; set; }
+        public string EndDateTime { get; set; }
 
         public int DateAndTimeId { get; set; }
         public int LocationId { get; set; }

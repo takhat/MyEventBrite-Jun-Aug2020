@@ -44,8 +44,8 @@ namespace EventCatalogAPI.Controllers
                                     select new EventItemViewModel
                                     {
                                         Id = e.Id,
-                                        Title = e.Title,
-                                        Description = e.Description,
+                                        Title = e.Title.ToUpper(),
+                                        Description = e.Description.Trim(),
                                         PictureUrl = e.PictureUrl,
                                         Price = e.Price,
                                         Contact = e.Contact,
@@ -58,7 +58,8 @@ namespace EventCatalogAPI.Controllers
                                         LocationId = l.Id,
                                         Location = l.Address ?? "Online Event",
                                         DateAndTimeId = dt.Id,
-                                        DateAndTime = dt.StartDateTime.ToString("f"),
+                                        StartDateTime = dt.StartDateTime.ToString("f"),
+                                        EndDateTime = dt.EndDateTime.ToString("f")
                                     }) 
                                 .OrderBy(e => e.Title)
                                 .Skip(pageIndex * pageSize)
