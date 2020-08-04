@@ -32,6 +32,9 @@ services:
       dockerfile: Dockerfile
     environment:
       CatalogUrl: http://catalog
+      IdentityUrl: http://192.168.236.81:6700
+      CallBackUrl: http://localhost:6821
+      ASPNETCORE_ENRIONMENT : Development
     ports:
       - "6821:80"
     container_name: eventswebmvc
@@ -39,6 +42,22 @@ services:
       - frontend
     depends_on:
       - catalog
+
+  tokenserver:
+    image: jewels/tokenapi
+    build:
+      context: .\TokenServiceApi
+      dockerfile: Dockerfile    
+    environment: 
+      Mvcclient: http://localhost:6821
+    ports:
+      - "6700:80"
+    container_name: tokenserviceapi
+    networks: 
+      - backend
+      - frontend
+    depends_on:
+      - mssqlserver
 
   mssqlserver:
     image: "microsoft/mssql-server-linux:latest"

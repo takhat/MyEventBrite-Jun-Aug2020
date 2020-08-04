@@ -149,9 +149,35 @@ namespace EventCatalogAPI.Controllers
             [FromQuery] int pageSize = 6
             )
         {
-            var query = (IQueryable<EventItemViewModel>)_context.EventItems;
+            // var query = (IQueryable<EventItemViewModel>)_context.EventItems;
 
-     
+            var query =  from e in _context.EventItems
+                               join t in _context.EventTypes on e.EventTypeId equals t.Id
+                               join c in _context.EventCategories on e.EventCategoryId equals c.Id
+                               join sc in _context.EventSubCategories on e.EventSubCategoryId equals sc.Id
+                               join l in _context.Locations on e.LocationId equals l.Id
+                               join dt in _context.DatesAndTimes on e.DateAndTimeId equals dt.Id
+                               select new EventItemViewModel
+                               {
+                                   Id = e.Id,
+                                   Title = e.Title.ToUpper(),
+                                   Description = e.Description.Trim(),
+                                   PictureUrl = e.PictureUrl,
+                                   Price = e.Price,
+                                   Contact = e.Contact,
+                                   EventTypeId = t.Id,
+                                   EventType = t.Type,
+                                   EventCategoryId = c.Id,
+                                   EventCategory = c.Category,
+                                   EventSubCategoryId = sc.Id,
+                                   EventSubCategory = sc.SubCategory,
+                                   LocationId = l.Id,
+                                   Location = l.Address ?? "Online Event",
+                                   DateAndTimeId = dt.Id,
+                                   StartDateTime = dt.StartDateTime.ToString("f"),
+                                   EndDateTime = dt.EndDateTime.ToString("f")
+                               };
+
             if (eventTypeId.HasValue)
             {
                 query = query.Where(c => c.EventTypeId == eventTypeId);
@@ -173,7 +199,7 @@ namespace EventCatalogAPI.Controllers
                             .OrderBy(c => c.Title)
                             .Skip(pageIndex * pageSize)
                             .Take(pageSize)
-                            .ToListAsync();
+                            .ToListAsync(); 
 
             eventItems = ChangePictureUrl(eventItems);
 
@@ -197,6 +223,7 @@ namespace EventCatalogAPI.Controllers
             [FromQuery] int pageSize = 6
             )
         {
+
             var query = (IQueryable<EventItemViewModel>)_context.EventItems;
             if (locationId.HasValue)
             {

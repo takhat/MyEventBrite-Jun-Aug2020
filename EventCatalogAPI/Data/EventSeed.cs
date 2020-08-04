@@ -30,7 +30,7 @@ namespace EventCatalogAPI.Data
                 eventContext.Locations.RemoveRange(eventContext.Locations);
                 eventContext.SaveChanges();
             }
-            if (!eventContext.EventTypes.Any())
+            if (!eventContext.Locations.Any())
             {
                 eventContext.Locations.AddRange(GetLocations());
                 eventContext.SaveChanges();
@@ -77,7 +77,7 @@ namespace EventCatalogAPI.Data
             {
                 eventContext.EventItems.AddRange(GetEventItems());
                 eventContext.SaveChanges();
-            }
+            }   
 
         }
 
@@ -86,9 +86,9 @@ namespace EventCatalogAPI.Data
         {
             return new List<EventType>
             {
-                new EventType { Type = "Concert or Performance" },
-                new EventType { Type = "Festival or Fair" },
-                new EventType { Type = "Health & Wellness" }
+                new EventType { Id=1, Type = "Concert or Performance" },
+                new EventType { Id=2, Type = "Festival or Fair" },
+                new EventType { Id=3, Type = "Health & Wellness" }
             };
         }
 
@@ -97,9 +97,9 @@ namespace EventCatalogAPI.Data
         {
             return new List<EventCategory>
             {
-                new EventCategory { Category = "Music" },
-                new EventCategory { Category = "Seasonal & Holiday" },
-                new EventCategory { Category = "Wellbeing" }
+                new EventCategory { Id=1, Category = "Music" },
+                new EventCategory { Id=2, Category = "Seasonal & Holiday" },
+                new EventCategory { Id=3, Category = "Wellbeing" }
             };
         }
 
@@ -108,14 +108,14 @@ namespace EventCatalogAPI.Data
         {
             return new List<EventSubCategory>
             {
-                new EventSubCategory { SubCategory = "Father's Day" },
-                new EventSubCategory { SubCategory = "Independence Day" },
-                new EventSubCategory { SubCategory = "Jazz" },
-                new EventSubCategory { SubCategory = "Ariana Grande" },
-                new EventSubCategory { SubCategory = "Song Writing" },
-                new EventSubCategory { SubCategory = "Mindfulness" },
-                new EventSubCategory { SubCategory = "Ayurveda" },
-                new EventSubCategory { SubCategory = "Yoga" }
+                new EventSubCategory { Id=1, SubCategory = "Father's Day" },
+                new EventSubCategory { Id=2, SubCategory = "Independence Day" },
+                new EventSubCategory { Id=3, SubCategory = "Jazz" },
+                new EventSubCategory { Id=4, SubCategory = "Ariana Grande" },
+                new EventSubCategory { Id=5, SubCategory = "Song Writing" },
+                new EventSubCategory { Id=6, SubCategory = "Mindfulness" },
+                new EventSubCategory { Id=7, SubCategory = "Ayurveda" },
+                new EventSubCategory { Id=8, SubCategory = "Yoga" }
             };
         }
 
@@ -240,162 +240,172 @@ namespace EventCatalogAPI.Data
             {
                 new EventItem
                 {
+                    Id=1, 
                     Title="Fourth of July Fireworks Show",
                     Description="The July 4, 2020 event starts at 9 p.m., but without a designated viewing area. The fireworks will be launched from the Oroville Airport on the west side of town in 2020, so it will be easier for residents to view the show from their front yards. Viewing is also possible from higher elevation points in the city or around Forebay or Afterbay, all while maintaining social distance from other spectators.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/1",
                     EventTypeId = 2,
                     EventCategoryId = 2,
                     EventSubCategoryId = 2,
+                    DateAndTimeId = 1,
                     LocationId = 1,
                     Price=10,
-                    Contact="Adarsha@gmail.com",
-                    DateAndTimeId = 1,
-
+                    Contact="Adarsha@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=2, 
                     Title="July 4th : A Tribute to the American Spirit Concert",
                     Description="A Tribute to the American Spirit” will highlight the resilience of all Americans, honor our veterans, and celebrate Independence Day with some patriotic favorites.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/2",
                     EventTypeId = 2,
                     EventCategoryId = 2,
                     EventSubCategoryId = 2,
+                    DateAndTimeId = 2,
                     LocationId = 2,
                     Price=11,
-                    Contact="Vidya@gmail.com",
-                    DateAndTimeId = 2,
-
+                    Contact="Vidya@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=3,
                     Title="Creative Academy of Music Composers",
                     Description="Join us for this memorable evening of great music performed by high school students of Lake Washington School District.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/3",
                     EventTypeId = 2,
                     EventCategoryId = 2,
                     EventSubCategoryId = 2,
+                    DateAndTimeId = 3,
                     LocationId = 3,
                     Price=18,
                     Contact="Tapsya@gmail.com",
-                    DateAndTimeId = 3,
                 },
 
                 new EventItem
                 {
+                    Id=4,
                     Title="Father's Day Special Brunch",
                     Description="Let us serve you our All-you-can-eat brunch favorites this Father's day",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/4",
                     EventTypeId = 2,
                     EventCategoryId = 2,
                     EventSubCategoryId = 1,
+                    DateAndTimeId = 4,
                     LocationId = 4,
                     Price=23,
-                    Contact="Hrudya@gmail.com",
-                    DateAndTimeId = 4,
+                    Contact="Hrudya@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=5,
                     Title="Dad & Daughter Dance Party",
                     Description="Dads, this is an opportunity for you to express your love for your daughter and to show her that she is a special treasure who deserves to be treated with kindness and respect. This formal event is for dads and daughters of all ages!",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/5",
                     EventTypeId = 2,
                     EventCategoryId = 2,
                     EventSubCategoryId = 1,
+                    DateAndTimeId = 5,
                     LocationId = 5,
                     Price=18,
-                    Contact="Adarsha@gmail.com",
-                    DateAndTimeId = 5,
+                    Contact="Adarsha@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=6,
                     Title="Father's Day Extravaganza!",
                     Description="Join us for a day full of fun activities for families. Activities are free for Dads on the occasion of Father's day.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/6",
                     EventTypeId = 2,
                     EventCategoryId = 2,
                     EventSubCategoryId = 1,
+                    DateAndTimeId = 6,
                     LocationId = 6,
                     Price=20,
-                    Contact="Hrudya@gmail.com",
-                    DateAndTimeId = 6,
+                    Contact="Hrudya@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=7,
                     Title="JazzFest",
                     Description="Enjoy Wonderful Live Music while having Lunch or coffee, soft Latin sounds with some Motown thrown in for Fun!",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/7",
                     EventTypeId = 1,
                     EventCategoryId = 1,
                     EventSubCategoryId = 3,
+                    DateAndTimeId = 7,
                     LocationId = 7,
                     Price=14,
                     Contact="Tapsya@gmail.com",
-                    DateAndTimeId = 7,
                 },
                 new EventItem
                 {
+                    Id=8,
                     Title="Ariana Grande Virtual Concert",
                     Description="Ariana grande is performing at the first of its kind Virtual Concert on August 5! Be the first person to book your tickets!",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/8",
                     EventTypeId = 1,
                     EventCategoryId = 1,
                     EventSubCategoryId = 4,
+                    DateAndTimeId = 8,
                     LocationId = 2,
                     Price=35,
                     Contact="Vidya@gmail.com",
-                    DateAndTimeId = 8,
                 },
                 new EventItem
                 {
+                    Id=9,
                     Title="Free Songwriters Workshop",
                     Description="This free online songwriting workshop for non-professional songwriters will be a fun challenge. Get free songwriting tips and techniques from passionate fellow songwriters from all around the world.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/9",
                     EventTypeId = 1,
                     EventCategoryId = 1,
                     EventSubCategoryId = 5,
+                    DateAndTimeId = 9,
                     LocationId = 2,
                     Price=25,
-                    Contact="Adarsha@gmail.com",
-                    DateAndTimeId = 9,
+                    Contact="Adarsha@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=10,
                     Title="Workshop on Mindfulness",
                     Description="Come experience the stress relieving experience of mindfulness workshop" ,
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/10",
                     EventTypeId = 3,
                     EventCategoryId = 3,
                     EventSubCategoryId = 6,
+                    DateAndTimeId = 10,
                     LocationId = 2,
                     Price=5,
-                    Contact="Hrudya@gmail.com",
-                    DateAndTimeId = 10,
+                    Contact="Hrudya@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=11,
                     Title="A talk on Ayurveda",
                     Description="Join us for a talk on Ayurveda - the sister science of Yoga by renowned Guru of Ayurveda",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/11",
                     EventTypeId = 3,
                     EventCategoryId = 3,
                     EventSubCategoryId = 7,
+                    DateAndTimeId = 11,
                     LocationId = 2,
                     Price=0,
-                    Contact="Tapasya@gmail.com",
-                    DateAndTimeId = 11,
+                    Contact="Tapasya@gmail.com"
                 },
                 new EventItem
                 {
+                    Id=12,
                     Title="Yoga for all",
                     Description="YogaForAll proudly presents 5th Annual Yoga Day celebration. Please join us for a yoga session with family and friends",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/12",
                     EventTypeId = 3,
                     EventCategoryId = 3,
                     EventSubCategoryId = 8,
+                    DateAndTimeId = 12,
                     LocationId = 8,
                     Price=11,
-                    Contact="Vidya@gmail.com",
-                    DateAndTimeId = 12,
+                    Contact="Vidya@gmail.com"
                 }
             };
 

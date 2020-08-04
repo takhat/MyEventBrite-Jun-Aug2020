@@ -2,7 +2,8 @@
 
 
 
- @if (User.FindFirst(x => x.Type == "preferred_username") != null) {
+@if (User.FindFirst(x => x.Type == "preferred_username") != null)
+{
 
     <section class="col-lg-4 col-md-5 col-xs-12">
         <div class="esh-identity">
@@ -16,23 +17,23 @@
 
                 <section class="esh-identity-drop">
 
-                   
-
-                   
-
                     <a class="esh-identity-item"
                        href="javascript:document.getElementById('logoutForm').submit()">
 
-                        <div class="esh-identity-name esh-identity-name--upper">Log Out</div>
+                        <div class="esh-identity-name esh-identity-name--upper">Logout</div>
                         <img class="esh-identity-image" src="~/images/logout.png">
                     </a>
+
+
                 </section>
             </form>
         </div>
     </section>
 
+
+ 
+
     <section class="col-lg-1 col-xs-12">
-     
     </section>
 
 }

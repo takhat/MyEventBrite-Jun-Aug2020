@@ -83,15 +83,15 @@
 }
 
 .esh-catalog-item-desc {
-    text-align: justify;
-    width: 90%;
-    font-size: small;
-    margin-top: 0.5rem;
+    text-align: justify;    
+    font-size: x-small;
+    margin-top: 0.05rem;
 }
 
 .esh-catalog-item-data {
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.05rem;
+    font-size: medium
 }
 
 .esh-catalog-item {
@@ -125,7 +125,8 @@
 }
 
 .esh-catalog-thumbnail {
-    max-width: 370px;
+    max-width: 200px;
+    max-height: 200px;
     width: 100%;
     display: inline-block;
 }
@@ -136,10 +137,11 @@
     color: #FFFFFF;
     cursor: pointer;
     font-size: 1rem;
-    height: 3rem;
+    height: 1.5rem;
     margin-top: 1rem;
     transition: all 0.35s;
-    width: 75%;
+    width: 70%;
+    align-content: center
 }
     .esh-catalog-button.is-disabled {
         opacity: .5;

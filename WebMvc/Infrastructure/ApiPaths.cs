@@ -25,7 +25,7 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}eventsubcategories";
             }
 
-            public static string GetAllEventLocations(string baseUri)
+      /*      public static string GetAllEventLocations(string baseUri)
             {
                 return $"{baseUri}eventlocations";
             }
@@ -33,7 +33,7 @@ namespace WebMvc.Infrastructure
             public static string GetAllEventDatesAndTimes(string baseUri)
             {
                 return $"{baseUri}eventdatesandtimes";
-            }
+            }       */
 
             public static string GetAllCatalogItems(string baseUri, int page, int take,
                                               int? type, int? category, int? subCategory)
