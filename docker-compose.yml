@@ -32,7 +32,7 @@ services:
       dockerfile: Dockerfile
     environment:
       CatalogUrl: http://catalog
-      IdentityUrl: http://192.168.236.81:6700
+      IdentityUrl: http://192.168.236.81:6701
       CallBackUrl: http://localhost:6821
       ASPNETCORE_ENRIONMENT : Development
     ports:
@@ -51,7 +51,7 @@ services:
     environment: 
       Mvcclient: http://localhost:6821
     ports:
-      - "6700:80"
+      - "6701:80"
     container_name: tokenserviceapi
     networks: 
       - backend

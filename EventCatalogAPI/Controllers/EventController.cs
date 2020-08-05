@@ -139,7 +139,6 @@ namespace EventCatalogAPI.Controllers
             return Ok(datesAndTimes);
         }
 
-
         [HttpGet("[action]/type/{eventTypeId}/category/{eventCategoryId}/subCategory/{eventSubCategoryId}")]
         public async Task<IActionResult> EventItems(
             int? eventTypeId,
