@@ -8,13 +8,13 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY . .
-RUN dotnet restore WebMvc.csproj
-RUN dotnet build "WebMvc.csproj" -c Release -o /app/build
+RUN dotnet restore CartApi.csproj
+RUN dotnet build "CartApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebMvc.csproj" -c Release -o /app/publish
+RUN dotnet publish "CartApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebMvc.dll"]
+ENTRYPOINT ["dotnet", "CartApi.dll"]
