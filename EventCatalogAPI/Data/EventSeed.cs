@@ -255,7 +255,7 @@ namespace EventCatalogAPI.Data
                 new EventItem
                 {
                     Id=2, 
-                    Title="July 4th : A Tribute to the American Spirit Concert",
+                    Title="July 4th : A Tribute to the American Spirit",
                     Description="A Tribute to the American Spirit” will highlight the resilience of all Americans, honor our veterans, and celebrate Independence Day with some patriotic favorites.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/2",
                     EventTypeId = 2,
