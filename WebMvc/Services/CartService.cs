@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 using WebMvc;
 using WebMvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
-//using WebMvc.Models.OrderModels;
+using WebMvc.Models.OrderModels;
 
 namespace WebMvc.Services
 {
@@ -25,9 +25,8 @@ namespace WebMvc.Services
         private IHttpContextAccessor _httpContextAccesor;
         private readonly ILogger _logger;
         private readonly IConfiguration _config;
-
-        public CartService(IHttpContextAccessor httpContextAccesor, IHttpClient httpClient, ILoggerFactory logger,
-            IConfiguration config)
+        public CartService(IHttpContextAccessor httpContextAccesor,
+            IHttpClient httpClient, ILoggerFactory logger, IConfiguration config)
         {
             _config = config;
             _remoteServiceBaseUrl = $"{_config["CartUrl"]}/api/cart";
@@ -93,7 +92,7 @@ namespace WebMvc.Services
             return response;
         }
 
-     /*   public Order MapCartToOrder(Cart cart)
+        public Order MapCartToOrder(Cart cart)
         {
             var order = new Order();
             order.OrderTotal = 0;
@@ -114,7 +113,7 @@ namespace WebMvc.Services
 
             return order;
         }
-     */
+
 
         public async Task<Cart> SetQuantities(ApplicationUser user, Dictionary<string, int> quantities)
         {
@@ -136,11 +135,11 @@ namespace WebMvc.Services
         public async Task<Cart> UpdateCart(Cart cart)
         {
 
-              var token = await GetUserTokenAsync();
+            var token = await GetUserTokenAsync();
             _logger.LogDebug("Service url: " + _remoteServiceBaseUrl);
             var updateBasketUri = ApiPaths.Basket.UpdateBasket(_remoteServiceBaseUrl);
             _logger.LogDebug("Update Basket url: " + updateBasketUri);
-            var response = await _apiClient.PostAsync(updateBasketUri, cart,token); 
+            var response = await _apiClient.PostAsync(updateBasketUri, cart, token);
             response.EnsureSuccessStatusCode();
 
             return cart;
@@ -151,7 +150,7 @@ namespace WebMvc.Services
             var context = _httpContextAccesor.HttpContext;
 
             return await context.GetTokenAsync("access_token");
-          
+
         }
     }
 }

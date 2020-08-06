@@ -33,6 +33,7 @@ namespace WebMvc
             services.AddControllersWithViews();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<ICatalogService, CatalogService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             services.AddTransient<ICartService, CartService>();
@@ -62,6 +63,7 @@ namespace WebMvc
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
                 options.Scope.Add("offline_access");
+                options.Scope.Add("order");
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
 
