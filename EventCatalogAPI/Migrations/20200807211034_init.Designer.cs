@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventCatalogAPI.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20200729014531_Initial")]
-    partial class Initial
+    [Migration("20200807211034_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,7 @@ namespace EventCatalogAPI.Migrations
                 .HasAnnotation("Relational:Sequence:.event_subcategories_hilo", "'event_subcategories_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("Relational:Sequence:.event_types_hilo", "'event_types_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("Relational:Sequence:.location_hilo", "'location_hilo', '', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:.zipcodes_hilo", "'zipcodes_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EventCatalogAPI.Domain.EventCategory", b =>
@@ -139,7 +140,12 @@ namespace EventCatalogAPI.Migrations
                     b.Property<int>("LocationType")
                         .HasColumnType("int");
 
+                    b.Property<int>("ZipCodeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ZipCodeId");
 
                     b.ToTable("Locations");
                 });
@@ -180,6 +186,23 @@ namespace EventCatalogAPI.Migrations
                     b.ToTable("EventTypes");
                 });
 
+            modelBuilder.Entity("EventCatalogAPI.Domain.ZipCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasMaxLength(25)
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "zipcodes_hilo")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
+
+                    b.Property<string>("Zipcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZipCodes");
+                });
+
             modelBuilder.Entity("EventCatalogAPI.Domain.EventItem", b =>
                 {
                     b.HasOne("EventCatalogAPI.Domain.EventDateAndTime", "DateAndTime")
@@ -209,6 +232,15 @@ namespace EventCatalogAPI.Migrations
                     b.HasOne("EventCatalogAPI.Domain.EventLocation", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EventCatalogAPI.Domain.EventLocation", b =>
+                {
+                    b.HasOne("EventCatalogAPI.Domain.ZipCode", "ZipCode")
+                        .WithMany()
+                        .HasForeignKey("ZipCodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

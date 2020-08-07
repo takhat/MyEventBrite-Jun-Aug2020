@@ -9,8 +9,9 @@ namespace WebMvc.Services
 {
     public interface ICatalogService
     {
-        Task<Event> GetCatalogItemsAsync(int page, int size, int? type, int? category, int? subCategory);
+        Task<Event> GetCatalogItemsAsync(int page, int size, int? zipcode, int? type, int? category, int? subCategory);
 
+        Task<IEnumerable<SelectListItem>> GetZipCodesAsync();
         Task<IEnumerable<SelectListItem>> GetTypesAsync();
 
         Task<IEnumerable<SelectListItem>> GetCategoriesAsync();

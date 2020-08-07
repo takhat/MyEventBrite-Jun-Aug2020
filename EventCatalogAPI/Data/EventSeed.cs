@@ -25,6 +25,17 @@ namespace EventCatalogAPI.Data
                 eventContext.DatesAndTimes.AddRange(GetDatesAndTimes());
                 eventContext.SaveChanges();
             }
+
+            if (eventContext.ZipCodes.Any())
+            {
+                eventContext.ZipCodes.RemoveRange(eventContext.ZipCodes);
+                eventContext.SaveChanges();
+            }
+            if (!eventContext.ZipCodes.Any())
+            {
+                eventContext.ZipCodes.AddRange(GetEventZipCodes());
+                eventContext.SaveChanges();
+            }
             if (eventContext.Locations.Any())
             {
                 eventContext.Locations.RemoveRange(eventContext.Locations);
@@ -118,6 +129,20 @@ namespace EventCatalogAPI.Data
                 new EventSubCategory { Id=8, SubCategory = "Yoga" }
             };
         }
+        //Event ZipCode
+        private static IEnumerable<ZipCode> GetEventZipCodes()
+        {
+            return new List<ZipCode>
+            {
+                new ZipCode { Id=1, Zipcode =  "Virtual event"},
+                new ZipCode { Id=2, Zipcode = "95965" },
+                new ZipCode { Id=3, Zipcode = "98052" },
+                new ZipCode { Id=4, Zipcode = "98101" },
+                new ZipCode { Id=5, Zipcode = "98035" },
+                new ZipCode { Id=6, Zipcode = "98007" },
+
+            };
+        }
 
         //Event Location
         private static IEnumerable<EventLocation> GetLocations()
@@ -128,48 +153,56 @@ namespace EventCatalogAPI.Data
                 {
                     Id=1,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "Oroville Airport, CA"
+                    Address = "Oroville Airport, CA",
+                    ZipCodeId=2
                 },
                 new EventLocation 
                 {
                     Id=2,
-                    LocationType = EventLocation.LocationEnum.OnlineEvent
+                    LocationType = EventLocation.LocationEnum.OnlineEvent,
+                    ZipCodeId=1
                 },
                 new EventLocation
                 {
                     Id=3,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "Redmond High School audiotorium, Redmond WA"
+                    Address = "Redmond High School audiotorium, Redmond WA",
+                    ZipCodeId=3
                 },
                 new EventLocation
                 {
                     Id=4,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "XYZ Restaurant, Seattle, WA"
+                    Address = "XYZ Restaurant, Seattle, WA",
+                    ZipCodeId=4
                 },
                 new EventLocation
                 {
                     Id=5,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "Dance Studio, Kent, WA"
+                    Address = "Dance Studio, Kent, WA",
+                    ZipCodeId=5
                 },
                 new EventLocation
                 {
                     Id=6,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "Pacific Nothwest Fair, Seattle, WA"
+                    Address = "Pacific Nothwest Fair, Seattle, WA",
+                    ZipCodeId=4
                 },
                 new EventLocation
                 {
                     Id=7,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "Downtown Bellevue Park, WA"
+                    Address = "Downtown Bellevue Park, WA",
+                    ZipCodeId=6
                 },
                 new EventLocation
                 {
                     Id=8,
                     LocationType = EventLocation.LocationEnum.Venue,
-                    Address = "Community Center, Bellevue, WA"
+                    Address = "Community Center, Bellevue, WA",
+                    ZipCodeId=6
                 }
 
             };
@@ -278,7 +311,7 @@ namespace EventCatalogAPI.Data
                     DateAndTimeId = 3,
                     LocationId = 3,
                     Price=18,
-                    Contact="Tapsya@gmail.com",
+                    Contact="Tapasya@gmail.com",
                 },
 
                 new EventItem
@@ -335,7 +368,7 @@ namespace EventCatalogAPI.Data
                     DateAndTimeId = 7,
                     LocationId = 7,
                     Price=14,
-                    Contact="Tapsya@gmail.com",
+                    Contact="Tapasya@gmail.com",
                 },
                 new EventItem
                 {
@@ -390,7 +423,7 @@ namespace EventCatalogAPI.Data
                     EventSubCategoryId = 7,
                     DateAndTimeId = 11,
                     LocationId = 2,
-                    Price=0,
+                    Price=10,
                     Contact="Tapasya@gmail.com"
                 },
                 new EventItem

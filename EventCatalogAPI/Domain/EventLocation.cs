@@ -17,5 +17,7 @@ namespace EventCatalogAPI.Domain
         public int Id { get; set; }
         public LocationEnum LocationType { get; set; }
         public string Address { get; set; }
+        public ZipCode ZipCode { get; set; }
+        public int ZipCodeId { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace EventCatalogAPI.Data
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<EventSubCategory> EventSubCategories { get; set; }
         public DbSet<EventLocation> Locations { get; set; }
+        public DbSet<ZipCode> ZipCodes { get; set; }
         public DbSet<EventDateAndTime> DatesAndTimes { get; set; }
 
         //To decide what columns are must and to set other rules, PK, FKs etc.
@@ -110,6 +111,17 @@ namespace EventCatalogAPI.Data
                 .IsRequired();
                 e.Property(l => l.Address)
                 .HasMaxLength(200);
+                e.HasOne(l => l.ZipCode)
+                .WithMany()
+                .HasForeignKey(l => l.ZipCodeId);
+            });
+            modelBuilder.Entity<ZipCode>(e =>
+            {
+                e.ToTable("ZipCodes");
+                e.Property(z => z.Id)
+                    .IsRequired()
+                    .UseHiLo("zipcodes_hilo")
+                    .HasMaxLength(25);
             });
             modelBuilder.Entity<EventDateAndTime>(e =>
             {

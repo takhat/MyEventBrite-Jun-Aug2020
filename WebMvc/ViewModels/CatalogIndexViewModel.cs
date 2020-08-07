@@ -9,6 +9,7 @@ namespace WebMvc.ViewModels
 {
     public class CatalogIndexViewModel
     {
+        public IEnumerable<SelectListItem> ZipCode { get; set; }
         public IEnumerable<SelectListItem> Types { get; set; }
 
         public IEnumerable<SelectListItem> Category { get; set; }
@@ -18,6 +19,7 @@ namespace WebMvc.ViewModels
         public IEnumerable<EventItem> EventItems { get; set; }
 
         public PaginationInfo PaginationInfo { get; set; }
+        public int? ZipCodeFilterApplied { get; set; }
 
         public int? TypesFilterApplied { get; set; }
 

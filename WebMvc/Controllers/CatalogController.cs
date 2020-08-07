@@ -18,18 +18,19 @@ namespace WebMvc.Controllers
             _service = service;
         }
 
-        public async Task<IActionResult> Index(int? page, int? typesFilterApplied, int? categoryFilterApplied, 
+        public async Task<IActionResult> Index(int? page, int? zipcodeFilterApplied, int? typesFilterApplied, int? categoryFilterApplied, 
             int? subcategoryFilterApplied)
         {
             var itemsOnPage = 10;
 
-            var catalog = await _service.GetCatalogItemsAsync(page ?? 0, itemsOnPage, typesFilterApplied,
+            var catalog = await _service.GetCatalogItemsAsync(page ?? 0, itemsOnPage, zipcodeFilterApplied, typesFilterApplied,
                 categoryFilterApplied, subcategoryFilterApplied);
             var ActualItemsOnPage = Math.Min((int)(catalog.Count - ((page ?? 0) * itemsOnPage)), itemsOnPage);
 
             var vm = new CatalogIndexViewModel
             {
                 EventItems = catalog.Data,
+                ZipCode = await _service.GetZipCodesAsync(),
                 Types = await _service.GetTypesAsync(),
                 Category = await _service.GetCategoriesAsync(),
                 SubCategory = await _service.GetSubCategoriesAsync(),
@@ -41,6 +42,7 @@ namespace WebMvc.Controllers
                     TotalItems = catalog.Count,
                     TotalPages = (int)Math.Ceiling((decimal)catalog.Count / itemsOnPage)
                 },
+                ZipCodeFilterApplied = zipcodeFilterApplied ?? 0,
                 TypesFilterApplied = typesFilterApplied ?? 0,
                 CategoryFilterApplied = categoryFilterApplied ?? 0,
                 SubCategoryFilterApplied = subcategoryFilterApplied ?? 0

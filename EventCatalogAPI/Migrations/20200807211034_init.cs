@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventCatalogAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,6 +29,10 @@ namespace EventCatalogAPI.Migrations
 
             migrationBuilder.CreateSequence(
                 name: "location_hilo",
+                incrementBy: 10);
+
+            migrationBuilder.CreateSequence(
+                name: "zipcodes_hilo",
                 incrementBy: 10);
 
             migrationBuilder.CreateTable(
@@ -82,16 +86,35 @@ namespace EventCatalogAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ZipCodes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(maxLength: 25, nullable: false),
+                    Zipcode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZipCodes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
                     LocationType = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(maxLength: 200, nullable: true)
+                    Address = table.Column<string>(maxLength: 200, nullable: true),
+                    ZipCodeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Locations_ZipCodes_ZipCodeId",
+                        column: x => x.ZipCodeId,
+                        principalTable: "ZipCodes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +192,11 @@ namespace EventCatalogAPI.Migrations
                 name: "IX_Event_LocationId",
                 table: "Event",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locations_ZipCodeId",
+                table: "Locations",
+                column: "ZipCodeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -191,6 +219,9 @@ namespace EventCatalogAPI.Migrations
             migrationBuilder.DropTable(
                 name: "Locations");
 
+            migrationBuilder.DropTable(
+                name: "ZipCodes");
+
             migrationBuilder.DropSequence(
                 name: "dateAndtime_hilo");
 
@@ -208,6 +239,9 @@ namespace EventCatalogAPI.Migrations
 
             migrationBuilder.DropSequence(
                 name: "location_hilo");
+
+            migrationBuilder.DropSequence(
+                name: "zipcodes_hilo");
         }
     }
 }

@@ -35,46 +35,16 @@ namespace EventCatalogAPI.Controllers
         {
             var eventItemsCount = await _context.EventItems.LongCountAsync();
 
-            var eventItems = await (from e in _context.EventItems
-                                    join t in _context.EventTypes on e.EventTypeId equals t.Id
-                                    join c in _context.EventCategories on e.EventCategoryId equals c.Id
-                                    join sc in _context.EventSubCategories on e.EventSubCategoryId equals sc.Id
-                                    join l in _context.Locations on e.LocationId equals l.Id
-                                    join dt in _context.DatesAndTimes on e.DateAndTimeId equals dt.Id
-                                    select new EventItemViewModel
-                                    {
-                                        Id = e.Id,
-                                        Title = e.Title.ToUpper(),
-                                        Description = e.Description.Trim(),
-                                        PictureUrl = e.PictureUrl,
-                                        Price = e.Price,
-                                        Contact = e.Contact,
-                                        EventTypeId = t.Id,
-                                        EventType = t.Type,
-                                        EventCategoryId = c.Id,
-                                        EventCategory = c.Category,
-                                        EventSubCategoryId = sc.Id,
-                                        EventSubCategory = sc.SubCategory,
-                                        LocationId = l.Id,
-                                        Location = l.Address ?? "Online Event",
-                                        DateAndTimeId = dt.Id,
-                                        StartDateTime = dt.StartDateTime.ToString("f"),
-                                        EndDateTime = dt.EndDateTime.ToString("f")
-                                    }) 
-                                .OrderBy(e => e.Title)
-                                .Skip(pageIndex * pageSize)
-                                .Take(pageSize)
-                                .ToListAsync();     
 
-            /*   var eventItems = await _context.EventItems
+            var eventItems = await _context.EventItems
                                .OrderBy(c => c.Title)
                                .Skip(pageIndex * pageSize)
                                .Take(pageSize)
-                               .ToListAsync();     */
+                               .ToListAsync();
 
             eventItems = ChangePictureUrl(eventItems);
 
-            var model = new PaginatedItemsViewModel<EventItemViewModel>
+            var model = new PaginatedItemsViewModel<EventItem>
             {
                 PageIndex = pageIndex,
                 PageSize = eventItems.Count,
@@ -86,7 +56,7 @@ namespace EventCatalogAPI.Controllers
         }
 
         //To replace url
-        private List<EventItemViewModel> ChangePictureUrl(List<EventItemViewModel> eventItems)
+        private List<EventItem> ChangePictureUrl(List<EventItem> eventItems)
         {
             eventItems.ForEach(eventItem =>
                 eventItem.PictureUrl = eventItem.PictureUrl.Replace(
@@ -95,7 +65,7 @@ namespace EventCatalogAPI.Controllers
             return eventItems;
         }
 
-        //To filter based on Types
+        //List all Types
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> EventTypes()
@@ -104,7 +74,7 @@ namespace EventCatalogAPI.Controllers
             return Ok(types);
         }
 
-        //Filter based on Categories
+        //List all Categories
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> EventCategories()
@@ -113,7 +83,7 @@ namespace EventCatalogAPI.Controllers
             return Ok(categories);
         }
 
-        //Filter based on subcategories
+        //List all subcategories
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> EventSubCategories()
@@ -121,7 +91,7 @@ namespace EventCatalogAPI.Controllers
             var subCategories = await _context.EventSubCategories.ToListAsync();
             return Ok(subCategories);
         }
-        //Filter based on Location
+        //List all Locations
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> EventLocations()
@@ -130,7 +100,7 @@ namespace EventCatalogAPI.Controllers
             return Ok(locations);
         }
 
-        //Filter based on DatesAndTimes
+        //List all DatesAndTimes
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> EventDatesAndTimes()
@@ -138,7 +108,16 @@ namespace EventCatalogAPI.Controllers
             var datesAndTimes = await _context.DatesAndTimes.ToListAsync();
             return Ok(datesAndTimes);
         }
+        //List all ZipCodes
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EventZipCodes()
+        {
+            var zipCodes = await _context.ZipCodes.ToListAsync();
+            return Ok(zipCodes);
+        }
 
+        //Filter based on event type Id, category Id and subcategory Id
         [HttpGet("[action]/type/{eventTypeId}/category/{eventCategoryId}/subCategory/{eventSubCategoryId}")]
         public async Task<IActionResult> EventItems(
             int? eventTypeId,
@@ -148,34 +127,8 @@ namespace EventCatalogAPI.Controllers
             [FromQuery] int pageSize = 6
             )
         {
-            // var query = (IQueryable<EventItemViewModel>)_context.EventItems;
+            var query = (IQueryable<EventItem>)_context.EventItems;
 
-            var query =  from e in _context.EventItems
-                               join t in _context.EventTypes on e.EventTypeId equals t.Id
-                               join c in _context.EventCategories on e.EventCategoryId equals c.Id
-                               join sc in _context.EventSubCategories on e.EventSubCategoryId equals sc.Id
-                               join l in _context.Locations on e.LocationId equals l.Id
-                               join dt in _context.DatesAndTimes on e.DateAndTimeId equals dt.Id
-                               select new EventItemViewModel
-                               {
-                                   Id = e.Id,
-                                   Title = e.Title.ToUpper(),
-                                   Description = e.Description.Trim(),
-                                   PictureUrl = e.PictureUrl,
-                                   Price = e.Price,
-                                   Contact = e.Contact,
-                                   EventTypeId = t.Id,
-                                   EventType = t.Type,
-                                   EventCategoryId = c.Id,
-                                   EventCategory = c.Category,
-                                   EventSubCategoryId = sc.Id,
-                                   EventSubCategory = sc.SubCategory,
-                                   LocationId = l.Id,
-                                   Location = l.Address ?? "Online Event",
-                                   DateAndTimeId = dt.Id,
-                                   StartDateTime = dt.StartDateTime.ToString("f"),
-                                   EndDateTime = dt.EndDateTime.ToString("f")
-                               };
 
             if (eventTypeId.HasValue)
             {
@@ -198,11 +151,11 @@ namespace EventCatalogAPI.Controllers
                             .OrderBy(c => c.Title)
                             .Skip(pageIndex * pageSize)
                             .Take(pageSize)
-                            .ToListAsync(); 
+                            .ToListAsync();
 
             eventItems = ChangePictureUrl(eventItems);
 
-            var model = new PaginatedItemsViewModel<EventItemViewModel>
+            var model = new PaginatedItemsViewModel<EventItem>
             {
                 PageIndex = pageIndex,
                 PageSize = eventItems.Count,
@@ -212,9 +165,44 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
-        [HttpGet("[action]/location/{locationId}/type/{eventTypeId}/category/{eventCategoryId}/subCategory/{eventSubCategoryId}")]
-        public async Task<IActionResult> Items(
-            int? locationId,
+
+        //Filter based on ZipCodeId
+        [HttpGet("[action]/zipcode/{zipcodeId}")]
+        public async Task<IActionResult> EventItems(
+            int? zipcodeId,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6
+            )
+        {
+            var query = (IQueryable<EventItem>)_context.EventItems;
+
+            query = query.Where(c => c.Location.ZipCodeId == zipcodeId);
+
+            var eventItemsCount = await query.LongCountAsync();
+
+            var eventItems = await query
+                            .OrderBy(c => c.Title)
+                            .Skip(pageIndex * pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+
+            eventItems = ChangePictureUrl(eventItems);
+
+            var model = new PaginatedItemsViewModel<EventItem>
+            {
+                PageIndex = pageIndex,
+                PageSize = eventItems.Count,
+                Count = eventItemsCount,
+                Data = eventItems
+            };
+
+            return Ok(model);
+        }
+
+        //Filter based on ZipCode Id, event Id, type Id, category Id, subcategory Id
+        [HttpGet("[action]/zipcode/{zipcodeId}/type/{eventTypeId}/category/{eventCategoryId}/subCategory/{eventSubCategoryId}")]
+        public async Task<IActionResult> EventItems(
+            int? zipcodeId,
             int? eventTypeId,
             int? eventCategoryId,
             int? eventSubCategoryId,
@@ -222,11 +210,10 @@ namespace EventCatalogAPI.Controllers
             [FromQuery] int pageSize = 6
             )
         {
-
-            var query = (IQueryable<EventItemViewModel>)_context.EventItems;
-            if (locationId.HasValue)
+            var query = (IQueryable<EventItem>)_context.EventItems;
+            if (zipcodeId.HasValue)
             {
-                query = query.Where(c => c.LocationId == locationId);
+                query = query.Where(c => c.Location.ZipCodeId == zipcodeId);
             }
 
             if (eventTypeId.HasValue)
@@ -254,7 +241,7 @@ namespace EventCatalogAPI.Controllers
 
             eventItems = ChangePictureUrl(eventItems);
 
-            var model = new PaginatedItemsViewModel<EventItemViewModel>
+            var model = new PaginatedItemsViewModel<EventItem>
             {
                 PageIndex = pageIndex,
                 PageSize = eventItems.Count,

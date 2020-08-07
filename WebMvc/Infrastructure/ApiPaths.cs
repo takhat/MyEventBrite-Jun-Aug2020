@@ -62,26 +62,27 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}eventsubcategories";
             }
 
-      /*      public static string GetAllEventLocations(string baseUri)
+            public static string GetAllEventZipCodes(string baseUri)
             {
-                return $"{baseUri}eventlocations";
+                return $"{baseUri}eventzipcodes";
             }
 
-            public static string GetAllEventDatesAndTimes(string baseUri)
+            /*public static string GetAllEventDatesAndTimes(string baseUri)
             {
                 return $"{baseUri}eventdatesandtimes";
             }       */
 
             public static string GetAllCatalogItems(string baseUri, int page, int take,
-                                              int? type, int? category, int? subCategory)
+                                              int? zipcode, int? type, int? category, int? subCategory)
             {
                 var filterQs = string.Empty;
-                if (type.HasValue || category.HasValue || subCategory.HasValue)
+                if (zipcode.HasValue || type.HasValue || category.HasValue || subCategory.HasValue)
                 {
+                    var zipcodeQs = (zipcode.HasValue) ? zipcode.Value.ToString() : "";
                     var typeQs = (type.HasValue) ? type.Value.ToString() : " ";
                     var categoryQs = (category.HasValue) ? category.Value.ToString() : " ";
                     var subCategoryQs = (subCategory.HasValue) ? subCategory.Value.ToString() : " ";
-                    filterQs = $"/type/{typeQs}/category/{categoryQs}/subCategory/{subCategoryQs}";
+                    filterQs = $"/zipcode/{zipcodeQs}/type/{typeQs}/category/{categoryQs}/subCategory/{subCategoryQs}";
                 }
                 return $"{baseUri}eventitems{filterQs}?pageIndex={page}&pageSize={take}";
             }   

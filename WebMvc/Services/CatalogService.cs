@@ -22,9 +22,9 @@ namespace WebMvc.Services
             _client = client;
         }
 
-        public async Task<Event> GetCatalogItemsAsync(int page, int size, int? type, int? category, int? subCategory)
+        public async Task<Event> GetCatalogItemsAsync(int page, int size, int? zipcode, int? type, int? category, int? subCategory)
         {
-            var catalogItemsUri = ApiPaths.Catalog.GetAllCatalogItems(_baseUrl, page, size, type, category, subCategory);
+            var catalogItemsUri = ApiPaths.Catalog.GetAllCatalogItems(_baseUrl, page, size, zipcode, type, category, subCategory);
             var dataString = await _client.GetStringAsync(catalogItemsUri);
             return JsonConvert.DeserializeObject<Event>(dataString);
         }
@@ -107,5 +107,31 @@ namespace WebMvc.Services
             return items;
         }
 
+        public async Task<IEnumerable<SelectListItem>> GetZipCodesAsync()
+        {
+            var zipcodeUri = ApiPaths.Catalog.GetAllEventZipCodes(_baseUrl);
+            var dataString = await _client.GetStringAsync(zipcodeUri);
+            var items = new List<SelectListItem>
+                {
+                    new SelectListItem
+                    {
+                        Value=null,
+                        Text="All",
+                        Selected=true
+                    }
+                };
+            var zipcodes = JArray.Parse(dataString);
+         
+                foreach (var zipcode in zipcodes)
+            {
+                items.Add(
+                    new SelectListItem
+                    {
+                        Value = zipcode.Value<string>("id"),
+                        Text = zipcode.Value<string>("zipcode"),
+                    });
+            }
+            return items;
+        }
     }
 }

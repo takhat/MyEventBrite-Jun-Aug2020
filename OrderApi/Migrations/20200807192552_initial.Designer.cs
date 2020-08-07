@@ -10,7 +10,7 @@ using OrderApi.Data;
 namespace OrderApi.Migrations
 {
     [DbContext(typeof(OrdersContext))]
-    [Migration("20200806213012_initial")]
+    [Migration("20200807192552_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
