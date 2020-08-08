@@ -288,7 +288,7 @@ namespace EventCatalogAPI.Data
                 new EventItem
                 {
                     Id=2, 
-                    Title="July 4th : A Tribute to the American Spirit",
+                    Title="A Tribute to the American Spirit",
                     Description="A Tribute to the American Spirit” will highlight the resilience of all Americans, honor our veterans, and celebrate Independence Day with some patriotic favorites.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/2",
                     EventTypeId = 2,
@@ -302,7 +302,7 @@ namespace EventCatalogAPI.Data
                 new EventItem
                 {
                     Id=3,
-                    Title="Creative Academy of Music Composers",
+                    Title="Academy of Music Composers",
                     Description="Join us for this memorable evening of great music performed by high school students of Lake Washington School District.",
                     PictureUrl="http://externaleventbaseurltobereplaced/api/pic/3",
                     EventTypeId = 2,
