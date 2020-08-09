@@ -29,6 +29,7 @@ For Assignment 3c, the user can now complete the order using Order API for the i
 Software to be installed to run or test the application
 - Visual Studio 2019 
 - Postman https://www.getpostman.com/
+- Docker Desktop
 
 ## How to use
 #### Demo
@@ -50,8 +51,8 @@ You can retrive your IP using [IPconfig](https://docs.microsoft.com/en-us/window
 
 4. After setting the IdentityUrl fields, Please run the project using Docker-compose and make sure all the containers are running. 
 
-#### Website to test
-##### [MyEventBrite] (http://localhost:6821)
+### Website to test
+##### [MyEventBrite](http://localhost:6821)
 
 ### APIs to test
 ##### 1. [Pic controller](http://localhost:6821/api/pic/4)
