@@ -55,15 +55,18 @@ https://youtu.be/RsnPD3A0sTo
 ##### [MyEventBrite](http://localhost:6821)
 
 ### APIs to test
-##### 1. [Pic controller](http://localhost:6821/api/pic/4)
 
-##### 2. [Event Controller](http://localhost:6821/api/Event/eventitems?pageIndex=0&pageSize=5)
+[Swagger link to APIs](http://localhost:6820/swagger/index.html)
 
-##### 3. [Filter using page reference](http://localhost:6821/api/Event/EventLocations?pageIndex=0&pageSize=2)
+##### 1. [Pic controller](http://localhost:6820/api/pic/4)
 
-##### 4. [Filter using event type, category and subcategory](http://localhost:6821/api/Event/eventitems/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
+##### 2. [Event Controller](http://localhost:6820/api/Event/eventitems?pageIndex=0&pageSize=5)
 
-##### 5. [Filter using location and event type, category, subcategory](http://localhost:6821/api/Event/items/location/2/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
+##### 3. [Filter using page reference](http://localhost:6820/api/Event/eventitems?pageIndex=0&pageSize=6)
+
+##### 4. [Filter using event type, category and subcategory](http://localhost:6820/api/Event/eventitems/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
+
+##### 5. [Filter using location and event type, category, subcategory](http://localhost:6820/api/Event/EventItems/zipcode/1/type/1/category/1/subCategory/5?pageIndex=0&pageSize=6)
 
 ## Technology Stack
 The technology stack used to build the application includes:
