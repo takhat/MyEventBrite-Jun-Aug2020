@@ -34,10 +34,10 @@ Software to be installed to run or test the application
 ## How to use
 #### Demo
 Here's a YouTube link showing a demo of the project:
-#### Phase 1 Current Phase
+#### Phase 1 (Assignment 3a)
 https://www.youtube.com/watch?v=wXy-2fKhtzA
 
-#### Phase 2&3 Current Phase
+#### Phase 2&3 (Assignment 3b & 3c)
 https://youtu.be/RsnPD3A0sTo
 
 #### Steps for running our full project
