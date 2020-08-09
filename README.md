@@ -29,7 +29,7 @@ For Assignment 3c, the user can now complete the order using Order API for the i
 Software to be installed to run or test the application
 - Visual Studio 2019 
 - Postman https://www.getpostman.com/
-- Docker Desktop
+- Docker Desktop https://www.docker.com/products/docker-desktop
 
 ## How to use
 #### Demo
@@ -42,7 +42,7 @@ https://youtu.be/RsnPD3A0sTo
 
 #### Steps for running our full project
 1. Download or Clone the project from the Github and open in Visual Studio.
-2. After opening the solution file (MyEventBrite.sln) Please make sure to start the project with Docker compose ( Please go to solutions explorer--> right click on the Solution "MyEventBrite" --> Set startup projects--> Choose docket-compose in the drop down and click OK)
+2. After opening the solution file (MyEventBrite.sln) Please make sure to start the project with Docker compose ( Please go to solutions explorer--> right click on the solution "MyEventBrite" --> Set startup projects--> Choose docker-compose in the drop down and click OK)
 3. Please open the docker-compose.yml and replace the IP with your local machine's IP for the below "IdentityUrl" fields in the file.
 
 IdentityUrl: http://192.168.1.2:6701
