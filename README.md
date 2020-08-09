@@ -93,10 +93,12 @@ The technology stack used to build the application includes:
 
 
 - For testing the APIs individually: Postman https://www.getpostman.com/
-- For checking the order : Stripe https://stripe.com/
 - For Messaging : RabbitMQ : http://localhost/15672
-
-
+- For checking the order : Stripe https://stripe.com/
+Use the below info to sign in to Stripe:
+email: team5sdc7@gmail.com
+password: KalAcademy@2020
+full name: team5
 
 ## Authors
 *** Tapasya Khatri *** Adarsha Kuthuru *** Hrudya Nair *** Vidhya Sambandan ***
