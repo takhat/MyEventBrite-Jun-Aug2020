@@ -13,9 +13,17 @@
 Our end goal is to build a web application similar to www.EventBrite.com that allows a user to organize events by creating online invitations, processing payments and track event related data. 
 It also allows users to view and/or sign up for events. We plan to use various Microservices such as Catalog and SignUp to build the Application. We plan to host the application on Docker containers.
 
-#### Phase 1 Current Phase
-For Assignment 3a our goal is to build a back-end Events Catalog Service with seeded test data stored on local SQL database that lets the user test API options. The output is a key-value pair in JSON format. 
+#### Phase 1 
+For Assignment 3a our goal was to build a back-end Events Catalog Service with seeded test data stored on local SQL database that lets the user test API options. The output is a key-value pair in JSON format. 
 Examples include viewing picture associated to an event picture number or viewing event details by location or type of event.
+
+#### Phase 2 
+For Assignment 3b our goal was to build a back-end Cart service and Token service with integration to WebMvc providing our APIs a web interface where a user can explore our event catalog using event catalog API (built in phase-1). The user can then authenticate and place desired event item in the cart. 
+
+#### Phase 3 
+
+For Assignment 3c, the user can now complete the order using Order API for the items which were placed in the cart. The cart automatically empties using the messaging (Event bus) once the user is back to the main page. 
+
 
 ## Requirements
 Software to be installed to run or test the application
@@ -25,26 +33,36 @@ Software to be installed to run or test the application
 ## How to use
 #### Demo
 Here's a YouTube link showing a demo of the project:
+#### Phase 1 Current Phase
 https://www.youtube.com/watch?v=wXy-2fKhtzA
 
-#### Steps
+#### Phase 2&3 Current Phase
+https://youtu.be/RsnPD3A0sTo
+
+#### Steps for running our full project
 1. Download or Clone the project from the Github and open in Visual Studio.
-2. In Visual Studio "Package Manager Console" window, use the command "Add-Migration" (give a name for the Migration e.g. Add-Migration Initial).
-3. Run using "IIS express". 
-(Caution - Re-running the application will give error because Ids will be reproduced and will not match with referenced Ids. 
-Therefore close out of the application and reopen, delete the Eventdb (if it exists) from "Sql Server Object Explorer" and the "Migration" folder (if it exists) from the Solution and follow steps 2 and 3 above.)
-4. Open the Postman App to test the API's below.
+2. After opening the solution file (MyEventBrite.sln) Please make sure to start the project with Docker compose ( Please go to solutions explorer--> right click on the Solution "MyEventBrite" --> Set startup projects--> Choose docket-compose in the drop down and click OK)
+3. Please open the docker-compose.yml and replace the IP with your local machine's IP for the below "IdentityUrl" fields in the file.
 
-#### APIs to test
-##### 1. [Pic controller](https://localhost:44397/api/pic/4)
+IdentityUrl: http://192.168.1.2:6701
 
-##### 2. [Event Controller](https://localhost:44397/api/Event/eventitems?pageIndex=0&pageSize=5)
+You can retrive your IP using [IPconfig](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig )
 
-##### 3. [Filter using page reference](https://localhost:44397/api/Event/EventLocations?pageIndex=0&pageSize=2)
+4. After setting the IdentityUrl fields, Please run the project using Docker-compose and make sure all the containers are running. 
 
-##### 4. [Filter using event type, category and subcategory](https://localhost:44397/api/Event/eventitems/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
+#### Website to test
+##### [MyEventBrite] (http://localhost:6821)
 
-##### 5. [Filter using location and event type, category, subcategory](https://localhost:44397/api/Event/items/location/2/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
+### APIs to test
+##### 1. [Pic controller](http://localhost:6821/api/pic/4)
+
+##### 2. [Event Controller](http://localhost:6821/api/Event/eventitems?pageIndex=0&pageSize=5)
+
+##### 3. [Filter using page reference](http://localhost:6821/api/Event/EventLocations?pageIndex=0&pageSize=2)
+
+##### 4. [Filter using event type, category and subcategory](http://localhost:6821/api/Event/eventitems/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
+
+##### 5. [Filter using location and event type, category, subcategory](http://localhost:6821/api/Event/items/location/2/type/1/category/1/subCategory/4?pageIndex=0&pageSize=1)
 
 ## Technology Stack
 The technology stack used to build the application includes:
@@ -58,17 +76,26 @@ The technology stack used to build the application includes:
   - Microsoft.EntityFrameworkCore.Relational
   - Microsoft.EntityFrameworkCore.SqlServer
   - Microsoft.EntityFrameworkCore.Tools
-- For testing the App: Postman https://www.getpostman.com/
+  - StackExchange.Redis (2.1.58)
+  - Newtonsoft.Json (12.0.3)
+  - Autofac.Extensions.DependencyInjection(6.0.0)
+  - System.IdentityModel.Tokens.Jwt (6.7.1)
+  - Microsoft.AspNetCore.Authentication.JwtBearer (3.1.6)
+  - Microsoft.AspNetCore.Mvc.NewtonsoftJson (3.1.6)
+  - MassTransit(7.0.2)
+  - MassTransit.AspNetCore(7.0.2)
+  - MassTransit.Autofac (7.0.2)
+  - MassTransit.RabbitMQ (7.0.2)
+
+
+- For testing the APIs individually: Postman https://www.getpostman.com/
+- For checking the order : Stripe https://stripe.com/
+- For Messaging : RabbitMQ : http://localhost/15672
+
+
 
 ## Authors
 *** Tapasya Khatri *** Adarsha Kuthuru *** Hrudya Nair *** Vidhya Sambandan ***
 
 ## Thank You
-We'd like to thank our instructor, Kal and all the TA's at KalAcademy for their excellent guidance and support. 
-
-
-
-
-
-
-
+We'd like to thank our instructor, Kal and all the TAs at KalAcademy for their excellent guidance and support. 
