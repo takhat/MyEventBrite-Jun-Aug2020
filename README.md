@@ -72,11 +72,11 @@ The technology stack used to build the application includes:
 - C#
 - .Net Core
 - Docker Desktop
-- Nuget Packages v.3.1.5: 
-  - Microsoft.EntityFrameworkCore
-  - Microsoft.EntityFrameworkCore.Relational
-  - Microsoft.EntityFrameworkCore.SqlServer
-  - Microsoft.EntityFrameworkCore.Tools
+- Nuget Packages: 
+  - Microsoft.EntityFrameworkCore (3.1.5)
+  - Microsoft.EntityFrameworkCore.Relational (3.1.5)
+  - Microsoft.EntityFrameworkCore.SqlServer (3.1.5)
+  - Microsoft.EntityFrameworkCore.Tools (3.1.5)
   - StackExchange.Redis (2.1.58)
   - Newtonsoft.Json (12.0.3)
   - Autofac.Extensions.DependencyInjection(6.0.0)
