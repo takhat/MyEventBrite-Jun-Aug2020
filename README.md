@@ -45,9 +45,9 @@ https://youtu.be/RsnPD3A0sTo
 2. After opening the solution file (MyEventBrite.sln) Please make sure to start the project with Docker compose ( Please go to solutions explorer--> right click on the solution "MyEventBrite" --> Set startup projects--> Choose docker-compose in the drop down and click OK)
 3. Please open the docker-compose.yml and replace the IP with your local machine's IP for the below "IdentityUrl" fields in the file.
 
-IdentityUrl: http://192.168.1.2:6701
+   IdentityUrl: http://192.168.1.2:6701
 
-You can retrive your IP using [IPconfig](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig )
+   You can retrive your IP using [IPconfig](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig )
 
 4. After setting the IdentityUrl fields, Please run the project using Docker-compose and make sure all the containers are running. 
 
