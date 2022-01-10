@@ -11,7 +11,7 @@
 ## Description
 #### Final Product
 Our end goal is to build a web application similar to www.EventBrite.com that allows a user to organize events by creating online invitations, processing payments and track event related data. 
-It also allows users to view and/or sign up for events. We plan to use various Microservices such as Catalog and SignUp to build the Application. We plan to host the application on Docker containers.
+It also allows users to view and/or sign up for events. We plan to use Catalog, Identity, Cart and Order Microservices to build the Application. We plan to host the application on Docker containers.
 
 #### Phase 1 
 For Assignment 3a our goal was to build a back-end Events Catalog Service with seeded test data stored on local SQL database that lets the user test API options. The output is a key-value pair in JSON format. 
